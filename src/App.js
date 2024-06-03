@@ -1,24 +1,43 @@
-import logo from './logo.svg';
 import './App.css';
+import TableContent from './components/Table/TableContent.tsx';
 
 function App() {
+  const head = ['Slug', 'Category', 'Required', 'Title', 'Status', 'Action'];
+  const body = [
+    {
+      id: '1',
+      slug: 'term-2',
+      category: 'Term',
+      required: 'No',
+      title: 'Term 2',
+      status: 'Hide',
+      action: '',
+    },
+    {
+      id: '2',
+      slug: 'term-2',
+      category: 'Term',
+      required: 'No',
+      title: 'Term 2',
+      status: 'Hide',
+      action: '',
+    },
+    {
+      id: '3',
+      slug: 'term-2',
+      category: 'Term',
+      required: 'No',
+      title: 'Term 2',
+      status: 'Hide',
+      action: '',
+    },
+  ];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <TableContent
+      head={head}
+      body={body}
+    />
   );
 }
 
