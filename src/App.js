@@ -1,4 +1,6 @@
 import './App.css';
+import DeleteForm from './components/DeleteForm/DeleteForm.tsx';
+import Login from './components/Login/Login.tsx';
 import TableContent from './components/Table/TableContent.tsx';
 
 function App() {
@@ -19,7 +21,7 @@ function App() {
       category: 'Term',
       required: 'No',
       title: 'Term 2',
-      status: 'Hide',
+      status: 'Show',
       action: '',
     },
     {
@@ -34,10 +36,12 @@ function App() {
   ];
 
   return (
-    <TableContent
-      head={head}
-      body={body}
-    />
+    // <TableContent
+    //   head={head}
+    //   body={body}
+    // />
+    // <DeleteForm />
+    <Login />
   );
 }
 
