@@ -17,7 +17,10 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import data from '../../data';
-import { useNavigate, NavLink } from 'react-router-dom';
+import { useNavigate, NavLink, Link } from 'react-router-dom';
+import SearchBar from '../SearchBar/SearchBar.tsx';
+import InfoBar from '../InfoBar/InfoBar.tsx';
+import { useState } from 'react';
 
 const drawerWidth = 240;
 
@@ -92,7 +95,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 export default function Sidebar() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  const navigate = useNavigate;
+  // const navigate = useNavigate;
+  const [name,setName] = useState();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -106,7 +110,12 @@ export default function Sidebar() {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" open={open}
+        sx={{
+          backgroundColor: '#ffffff',
+          color: '#2f2f2f'
+        }}
+      >
         <Toolbar>
           <IconButton
             color="inherit"
@@ -121,20 +130,26 @@ export default function Sidebar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Nurture Wave
+            {name}
           </Typography>
+          <div><SearchBar/></div>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
+          <Typography variant="h6" noWrap component="div">
+            NurtureWave
+          </Typography>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
-        <Divider />
+        <Divider/>
         <List>
           {data.map((text: any, index: number) => (
-            <NavLink to={text.path}>
+            <NavLink to={text.path} onClick={()=> {
+              setName(text.label)
+            }}>
               <ListItem key={text.id} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
@@ -154,19 +169,21 @@ export default function Sidebar() {
                   {text.icon}
                 </ListItemIcon>
                 <ListItemText 
-                  primary={text.label} sx={{ opacity: open ? 1 : 0 }} />
+                  secondary={text.label} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
             </NavLink>
             
           ))}
         </List>
-        
+        <Divider/>
+        <InfoBar/>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         
       </Box>
+      
     </Box>
   );
 }
